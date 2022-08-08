@@ -9,13 +9,13 @@ class HelloWorld {
         int end = arr.length-1;
         while(start<=end){
             int mid = (start+end)/2;
-            if(start == end){
+            if(start == end){                   // return start;
                 return arr[start];
             }
-            if(arr[mid] > arr[mid+1]){
+            if(arr[mid] > arr[mid+1]){          // In descending part
                 end = mid;
             }
-            else{
+            else{                               // In ascending part
                 start = mid+1;
             }
         }
