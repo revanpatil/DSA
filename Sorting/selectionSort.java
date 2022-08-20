@@ -1,7 +1,7 @@
 import java.util.Arrays;
 
-public class InsertionSort {
-    static void insertionSort(int arr[]){
+public class selectionSort {
+    static void selectionSort(int arr[]){
         for(int i =0;i<arr.length;i++){
             int last = arr.length-i-1;
             int maxIndex = getMaxIndex(arr,0,last);
@@ -25,8 +25,8 @@ public class InsertionSort {
 
     }
     public static void main(String[] args) {
-        int arr[] = new int[]{5,1,4,2,3};
-        insertionSort(arr);
+        int arr[] = new int[]{5,10,40,20,32};
+        selectionSort(arr);
         System.out.println(Arrays.toString(arr));
     }
 }
