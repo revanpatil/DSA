@@ -1,3 +1,14 @@
+/*
+ * Time complexity: Worst case = O(n^2)
+ *                  Best case = O(n)        As we are breaking the loop if array is sorted
+ * 
+ * Used because: 1. Adaptive - Steps are reduced if array is sorted
+ *               2. Stable
+ *               3. Used for smaller values of n when array is partially sorted
+ *               4. Takes part in hybrid sorting algorithms
+ */
+
+
 import java.util.Arrays;
 
 public class InsertionSort {
