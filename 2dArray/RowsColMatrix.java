@@ -9,6 +9,7 @@ public class RowsColMatrix {
 			{28,29,37,49},
 			{33,34,38,50}
 		};
+		
 		int target = 49;
 
 		System.out.println(Arrays.toString(search(arr,49)));
