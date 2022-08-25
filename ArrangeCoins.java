@@ -27,6 +27,7 @@ public class ArrangingCoins {
 	public int arrangeCoins(int n) {
         long start = 0;
         long end = n;
+		
         long sum = n;
         
         
