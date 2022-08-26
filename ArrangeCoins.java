@@ -41,6 +41,7 @@ public class ArrangingCoins {
                 start = mid+1;
             }
             else if(temp>sum){
+		    
                 end = mid-1;
             }
         }
