@@ -7,7 +7,7 @@ public class isPrime {
     }
     public static boolean isPrime(int n){
         while(n<=1){
-            return true;
+            return false;
         }
         int c =2;
         while(c*c <=n){
