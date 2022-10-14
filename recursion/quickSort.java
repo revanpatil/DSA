@@ -1,3 +1,6 @@
+Best Case : O(NlogN)
+Worst case : O(N^2)
+
 import java.util.Arrays;
 
 public class quickSort {
