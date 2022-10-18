@@ -42,7 +42,7 @@ public class ArrangingCoins {
                 return (int)mid;
             }
             else if(temp<sum){
-                start = mid+1;
+                 start = mid+1;
             }
             else if(temp>sum){
 		    
