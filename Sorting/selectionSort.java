@@ -1,3 +1,18 @@
+/*
+** Selection Sort:
+Find a max element in the array and replace it with the last index
+    Find second max and replace it with second last ...
+    
+    or
+    
+Find a min element in the array and replace it with first index 
+    Find second min and replace with second index ...
+ * Complexity: Best Case = Worst Case = O(n^2)
+ * Works well for small lists/arrays
+ */
+
+
+
 import java.util.Arrays;
 
 public class selectionSort {
