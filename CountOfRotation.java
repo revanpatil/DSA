@@ -1,4 +1,3 @@
-// Online Java Compiler
 // Find count of rotated sorted array 
 
 class RotationCount{
