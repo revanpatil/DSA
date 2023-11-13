@@ -1,12 +1,9 @@
-Best Case : O(NlogN)
-Worst case : O(N^2)
-
 import java.util.Arrays;
 
 public class quickSort {
 
     public static void main(String[] args) {
-        int arr[] = {5,4,3,2,1};
+        int arr[] = {5,4,3,2,1,6,11,8,12};
         sort(arr,0,arr.length-1);
         System.out.println(Arrays.toString(arr));
     }
@@ -39,7 +36,7 @@ public class quickSort {
         }
 
         sort(arr,low,e);
-        sort(arr,high,s);
+        sort(arr,s,high);
 
     }
 }

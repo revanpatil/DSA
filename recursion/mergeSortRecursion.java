@@ -1,14 +1,16 @@
+package io.github.jiangdequan;
+
 import java.util.Arrays;
 
 public class mergeSortRecursion {
     public static void main(String[] args) {
         int arr[] = {5,3,4,1,2};
-        arr = mergeSort(arr);
+        mergeSort(arr);
         System.out.println(Arrays.toString(arr));
     }
 
     static int[] mergeSort(int arr[]){
-        if(arr.length == 1){
+        if(arr.length == 0){
             return arr;
         }
         int mid = arr.length/2;
@@ -32,7 +34,6 @@ public class mergeSortRecursion {
                 mix[k] = second[j];
                 j++;
             }
-            k++;
         }
 
         while(i<first.length){
@@ -41,8 +42,8 @@ public class mergeSortRecursion {
             k++;
         }
 
-        while(j<second.length){
-            mix[k] = second[j];
+        while(i<second.length){
+            mix[k] = second[i];
             j++;
             k++;
         }

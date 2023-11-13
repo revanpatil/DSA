@@ -1,20 +1,20 @@
-// Online Java Compiler
-// Use this editor to write, compile and run your Java code online
+package io.github.jiangdequan;
 
-class HelloWorld {
-    static int sum = 0;
+public class reverseANumber {
     public static void main(String[] args) {
-        
-        reverseNumber(5432);
-        System.out.println(sum);
+        System.out.println(reverse(4321));
     }
-    
-    static void reverseNumber(int number){
-        
-        if(number == 0){
-            return;
+    static int reverse(int n){
+        int digits = (int)(Math.log10(n)) +1;
+        return helper(n, digits);
+    }
+
+    static int helper(int n, int digits){
+        if(n%10 == n){
+            return n;
         }
-        sum = sum*10 + number%10;
-        reverseNumber(number/10);
+        int rem = n%10;
+        return rem* (int)(Math.pow(10,digits-1)) + helper(n/10, digits-1);
     }
+
 }
