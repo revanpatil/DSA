@@ -642,3 +642,109 @@ public class MergeSort {
     }
 }
 
+----------
+	DFS and BFS 
+
+// BFS to find the shortest path from the root to a leaf
+    public static int findShortestPath(TreeNode root) {
+        if (root == null) return 0;
+
+        // Queue for BFS
+        Queue<TreeNode> queue = new LinkedList<>();
+        Queue<Integer> depth = new LinkedList<>();
+
+        queue.add(root);
+        depth.add(1); // Depth starts at 1 for the root
+
+        while (!queue.isEmpty()) {
+            TreeNode current = queue.poll();
+            int currentDepth = depth.poll();
+
+            // If it's a leaf node, return the depth
+            if (current.left == null && current.right == null) {
+                return currentDepth;
+            }
+
+            // Add left child to queue
+            if (current.left != null) {
+                queue.add(current.left);
+                depth.add(currentDepth + 1);
+            }
+
+            // Add right child to queue
+            if (current.right != null) {
+                queue.add(current.right);
+                depth.add(currentDepth + 1);
+            }
+        }
+        return 0; // This won't be reached if the tree is valid
+    }
+	
+
+	Maximum sum for weighted nodes DFS 
+
+    static class Result {
+        int maxSum;
+        public Result() {
+            maxSum = Integer.MIN_VALUE; // To handle negative values
+        }
+    }
+
+    public static int findMaxPathSum(TreeNode root) {
+        Result result = new Result();
+        calculatePathSum(root, result);
+        return result.maxSum;
+    }
+
+    // Helper function to calculate the maximum path sum using DFS
+    private static int calculatePathSum(TreeNode node, Result result) {
+        if (node == null) return 0; // Base case: Null nodes contribute 0 to the path
+
+        // Recursively find the max path sum for the left and right subtrees
+        int leftSum = Math.max(0, calculatePathSum(node.left, result));  // Ignore negative sums
+        int rightSum = Math.max(0, calculatePathSum(node.right, result));
+
+        // Path sum passing through the current node
+        int currentPathSum = leftSum + node.value + rightSum;
+
+        // Update the global max path sum if the current path sum is larger
+        result.maxSum = Math.max(result.maxSum, currentPathSum);
+
+        // Return the maximum sum including the current node and one of its children
+        return node.value + Math.max(leftSum, rightSum);
+    }
+	
+	
+	Longest sub string in a window 
+public class LongestUniqueSubstring {
+
+    public static int findLongestUniqueSubstring(String s) {
+        // HashSet to store the unique characters in the current window
+        HashSet<Character> set = new HashSet<>();
+        
+        int left = 0; // Left pointer of the window
+        int maxLength = 0; // To store the maximum length of unique substring
+
+        // Expand the window by moving the right pointer
+        for (int right = 0; right < s.length(); right++) {
+            char currentChar = s.charAt(right);
+
+            // If the character is already in the set, remove characters from the left
+            while (set.contains(currentChar)) {
+                set.remove(s.charAt(left));
+                left++;
+            }
+
+            // Add the current character to the set
+            set.add(currentChar);
+
+            // Update the maximum length
+            maxLength = Math.max(maxLength, right - left + 1);
+        }
+
+        return maxLength;
+    }
+
+
+
+
