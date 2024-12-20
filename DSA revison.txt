@@ -29,7 +29,7 @@ static void subsequence(String p,String up){
 	}
 	Char ch = up.subString(0);
 	skip(p + ch ,up.subString(1));
-	skip(ch, up.subString(1);
+	skip(p, up.subString(1);
 }
 }
 
@@ -745,6 +745,506 @@ public class LongestUniqueSubstring {
         return maxLength;
     }
 
+***************************************************************************************************************************
+Comparators : 
 
+package main.java;
+
+import org.codewithease.javatopics.commons.Employee;
+
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+public class ComparatorDemo {
+
+    public static void main(String[] args) {
+
+        /*
+       Sort List of Objects
+
+       Custom Sorting Criteria
+
+       Multiple Sorting Criteria
+
+       Case-Insensitive Sorting
+
+       Reverse Order Sorting
+         */
+
+        //1. Sort the strings based on their length in ascending order
+        List<String> fruits = Arrays.asList("apple", "cherry", "banana", "pineapple", "kiwi", "elderberry");
+
+//        fruits.sort(Comparator.comparingInt(String::length));
+        Collections.sort(fruits, Comparator.comparingInt(String::length));
+
+        System.out.println("fruits "+fruits);
+
+
+        // 2.Sort the list of integers in descending order and print the result
+
+        List<Integer> nums = Arrays.asList(3,2,90,34,21,12);
+        nums.sort(Comparator.reverseOrder());
+
+        System.out.println("nums in reverse order : "+nums);
+
+
+        // 3.Sort the list of employees based on their age in ascending order and print the result
+
+        List<Employee> employees = Arrays.asList(new Employee(1, "Varsha", 28, 3000),
+                new Employee(2, "Harsha", 21, 4000),
+                new Employee(3, "Tony", 21, 1000),
+                new Employee(4, "Ramesh", 30, 5000));
+
+        employees.sort(Comparator.comparingInt(Employee::getAge));
+        System.out.println("employees based on age "+employees);
+
+
+
+        // 4.Sort the list of employees based on their age in ascending order. If the ages are the same, compare by salary. Print the result.
+
+        employees.sort(Comparator.comparingInt(Employee::getAge).thenComparing(Employee::getSalary));
+        System.out.println(
+                "employees with multiple sort criteria "+employees
+        );
+
+
+
+        // 5.Sort the list of strings based on the index of the first occurrence of "e" in each string and print the result
+
+        fruits.sort(Comparator.comparingInt(e -> e.indexOf("e")));
+
+        System.out.println("fruits with index position sorting :: "+ fruits);
+
+
+
+        //6. Sort a list of strings ignoring case sensitivity using a case-insensitive comparator.
+
+        List<String> fruitsMix = Arrays.asList("APPLE", "cherry", "baNaNa", "pineapple", "KiWI", "elderberry");
+        Comparator<String> caseInsensitiveComp = String.CASE_INSENSITIVE_ORDER;
+        fruitsMix.sort(caseInsensitiveComp);
+
+        System.out.println(fruitsMix);
+
+
+        //7. Sort a list of dates in ascending order using the comparing() method with a lambda expression.
+        List<LocalDate> dates = Arrays.asList(
+                LocalDate.of(2023, 5, 10),
+                LocalDate.of(2023, 3, 15),
+                LocalDate.of(2023, 7, 1)
+        );
+
+        dates.sort(Comparator.comparing(date -> date));
+
+        System.out.println(dates);
+
+ 	//fruits.sort(Comparator.comparingInt(String::length));
+
+       List<String> sortedFruits = fruits.stream()
+                .sorted(Comparator.comparingInt(String::length))
+                .collect(Collectors.toList());
+
+
+        Collections.sort(fruits,Comparator.comparingInt(String::length));
+
+
+        List<Integer> sorted = nums.stream()
+                .sorted(Comparator.reverseOrder())
+                .collect(Collectors.toList());
+
+
+
+
+    }
+}
+
+*************************************************************************************************************************
+
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class StreamsAllCodeSolutions {
+    public static void main(String[] args) {
+        List<Integer> nums = Arrays.asList(1,2,3,4,5,6,8,101);
+        int[] arr = {1,2,3,4};
+       // Write a program to find the sum of all elements in a List using streams.
+        int sums = nums.stream().mapToInt(Integer::intValue).sum();
+        System.out.println(sums);
+
+
+        //Given a List of integers, write a program to find the maximum element using streams.
+        int max = nums.stream().max(Comparator.naturalOrder()).get();
+
+        System.out.println("max element :"+max);
+
+        List<String> fruits = Arrays.asList("apple", "banana", "cherry", "coconut", "apple");
+
+        //Given a List of strings, write a program to count the number of strings that start with a specific character using streams.
+        long fruitCount = fruits.stream().filter( s -> s.startsWith("c")).count();
+        System.out.println("fruitCount: "+fruitCount);
+
+
+        //Write a program to convert a List of strings to uppercase using streams.
+        fruits.stream().map(String::toUpperCase).forEach(System.out::println);
+
+        //Given a List of integers, write a program to filter out the even numbers using streams.
+        // Count the number of elements in a list that satisfy a specific condition using streams.
+
+        nums.stream().filter(n -> n % 2 == 0).forEach(System.out::println);
+        int even = (int) nums.stream().filter(n -> n % 2 == 0).count();
+        System.out.println("no of even "+even);
+
+
+        //Write a program to find the average of a List of floating-point numbers using streams.
+        List<Double> numsFloat = Arrays.asList(1.3, 2.4, 3.1, 4.2, 5.4);
+        double avg = numsFloat.stream().mapToDouble(Double::doubleValue).average().getAsDouble();
+        System.out.println("avg ::"+avg);
+
+        //Given a List of strings, write a program to concatenate all the strings using streams.
+        String concat = fruits.stream().collect(Collectors.joining());
+        System.out.println(concat);
+
+        //Write a program to remove duplicate elements from a List using streams.
+        fruits.stream().distinct().forEach(System.out::println);
+
+        //Given a List of objects, write a program to sort the objects based on a specific attribute using streams.
+        List<Person> people = Arrays.asList(
+                new Person("Alice", 21),
+                new Person("Anna", 29),
+                new Person("Bob", 30),
+                new Person("Barbie", 56),
+                new Person("Charlie", 20)
+        );
+
+        people.stream().sorted(Comparator.comparing(Person::getAge)).collect(Collectors.toList()).forEach(System.out::println);
+
+        //Write a program to check if all elements in a List satisfy a given condition using streams.
+        List<Integer> numbers = Arrays.asList(2, 4, 6, 8, 10);
+        boolean allEven = numbers.stream().allMatch(n -> n % 2 == 0);
+        System.out.println("All numbers are even: " + allEven);
+
+
+        //Sort a list of strings in ascending order using streams.
+        fruits.stream().sorted().collect(Collectors.toList()).forEach(System.out::println);
+
+        //Check if a list contains a specific element using streams.
+        boolean exists = nums.stream().anyMatch(n -> n.equals(9));
+        System.out.println(exists);
+
+        //Create a new list containing the square of each element from the original list using streams
+        nums.stream().map(n -> n*n).collect(Collectors.toList()).forEach(System.out::println);
+
+        //Find the average length of strings in a list using streams.
+        fruits.stream().mapToInt(String::length).average();
+
+        //Find the longest string in a list using streams.
+        fruits.stream().mapToInt(String::length).max();
+
+//        Group a list of objects based on a specific attribute using streams.
+//        List<Employee> sortedEmployees = people.stream()
+//                .sorted(Comparator.comparing(Employee::getDepartment)
+//                        .thenComparing(Employee::getSalary))
+//                .collect(Collectors.toList());
+
+
+        //Remove null values from a list using streams.
+        List<String> nonNullValues = fruits.stream()
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+
+
+        //Find the second smallest element in a list of integers using streams.
+        Optional<Integer> secondSmallest = numbers.stream()
+                .distinct()
+                .sorted()
+                .skip(1)
+                .findFirst();
+
+
+
+        //Find the intersection of two lists using streams
+        List<Integer> list1 = Arrays.asList(1, 2, 3, 4, 5);
+        List<Integer> list2 = Arrays.asList(4, 5, 6, 7, 8);
+
+        List<Integer> intersection = list1.stream()
+                .filter(list2::contains)
+                .collect(Collectors.toList());
+
+
+    }
+}
+
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+public class StreamsCodeDemoPart2 {
+    public static void main(String[] args) {
+
+        //1. Given a sentence, find and print the frequency of each word.
+         String sentence = "Java is a programming language. Java is versatile.";
+
+         Map<String, Long> wordFreqMap = Arrays.stream(sentence.split("\\s+"))
+                 .collect(Collectors.groupingBy(String::toLowerCase, Collectors.counting()));
+
+
+//        System.out.println(wordFreqMap);
+
+        //2. Given a list of integers, find out all the numbers starting with 1.
+
+        List<Integer> nums = Arrays.asList(12, 13, 18, 21, 90, 11);
+
+        List<Integer> numsWithOne = nums.stream().filter( n -> String.valueOf(n).startsWith("1")).collect(Collectors.toList());
+
+//        System.out.println(numsWithOne);
+
+       //3. Given a list of names, group them by their first letter, and then count the number of names in each group.
+
+        String[] names = {"Alice", "Bob", "Charlie", "Amy", "Bill", "Anna"};
+
+        Map<Character,Long> namesMap = Arrays.stream(names).collect(Collectors.groupingBy(s -> s.charAt(0), Collectors.counting()));
+
+//        System.out.println(namesMap);
+
+
+        // 4. Find and print duplicate numbers in an array if it contains multiple duplicates?
+
+        int[] arr = {2,4,2,3,1,5, 5,78,3,1,5};
+
+//        Arrays.stream(arr).boxed()
+//                .collect(Collectors.groupingBy(e-> e, Collectors.counting()))
+//                .entrySet().stream()
+//                //key -value - 2 (k), 2(val)
+//                .filter(entry -> entry.getValue() > 1)
+//                .map(Map.Entry::getKey)
+//                .forEach(System.out::println);
+
+
+        // 5. How are duplicates removed from a given array in Java?
+//
+        int[] arr2 = {2,4,2,3,1,78};
+
+        int[] newarr = Arrays.stream(arr).distinct().toArray();
+
+//        System.out.println(Arrays.toString(newarr));
+
+
+        //6. Given a list of words, filter and print the palindromes
+
+        List<String> strings = List.of("level", "hello", "radar", "world", "deed");
+
+        List<String> palindromeWords = strings.stream().
+                filter(str -> str.equals(new StringBuilder(str).reverse().toString())).collect(Collectors.toList());
+
+//        System.out.println(palindromeWords);
+
+
+        // 7. How do you merge two sorted arrays into a single sorted array?
+        int[] array1 = {1, 3,32, 5, 7};
+        int[] array2 = {2, 4, 6,62, 8};
+
+        int[] sortedArray = IntStream.concat(Arrays.stream(array1), Arrays.stream(array2)).sorted().toArray();
+//       System.out.println(Arrays.toString(sortedArray));
+
+
+        //8. Given two lists of strings, concatenate them and remove duplicates.
+
+        List<String> list1 = List.of("apple", "banana", "orange");
+        List<String> list2 = List.of("banana", "kiwi", "grape");
+
+        List<String> uniqueList = Stream.concat(list1.stream(), list2.stream()).distinct().collect(Collectors.toList());
+//        System.out.println(uniqueList);
+
+
+        // 9. Student Grade Classification - 70 and above pass
+
+        List<Student> students = List.of(
+                new Student("Alice", 85),
+                new Student("Bob", 60),
+                new Student("Charlie", 75),
+                new Student("David", 90)
+        );
+
+
+        Map<String, List<Student>> studentMap =
+                students.stream().collect(Collectors.groupingBy(student -> student.grade >= 70 ? "Pass" : "Fail"));
+
+//        System.out.println(studentMap);
+
+
+        //10. Given a list of strings, sort them according to increasing order of their length.
+
+        List<String> fruits = Arrays.asList("Mango","pear" ,"Apple", "Banana", "Pineapple", "Kiwi");
+
+        fruits.stream().sorted(Comparator.comparingInt(String::length)).forEach(System.out::println);
+
+
+        //12.Partition a list of numbers into two groups: even and odd, using a custom predicate.
+        List<Integer> numbers1 = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        Map<Boolean, List<Integer>> partitionedNumbers = numbers1.stream()
+                .collect(Collectors.partitioningBy(n -> n % 2 == 0));
+
+        System.out.println(partitionedNumbers);
+
+        //13. Find the squares of the first three even numbers in a list.
+
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        List<Integer> firstThreeSquares = numbers.stream()
+                .filter(n -> n % 2 == 0)
+                .map(n -> n * n)
+                .limit(3)
+                .collect(Collectors.toList());
+
+        // 14. Flatten a list of lists
+
+        List<List<Integer>> listOfLists = Arrays.asList(Arrays.asList(1, 2), Arrays.asList(3, 4), Arrays.asList(5, 6));
+        List<Integer> flattenedList = listOfLists.stream()
+                .flatMap(List::stream)
+                .collect(Collectors.toList());
+
+        System.out.println(flattenedList);
+
+
+
+    }
+}
+
+import java.util.Comparator;
+import java.util.stream.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+public class StreamsPart2 {
+
+    public static void main(String[] args) {
+
+        List<Integer> numbers = Arrays.asList(123, 45, 167, 189, 12, 1234, 198, 102);
+
+        List<String> fruits = Arrays.asList("Mango", "Apple", "Banana", "Kiwi");
+
+        //1. Given a list of integers, find the total number of elements present in the list.
+        String str = "madam";
+
+        //1. Given a list of integers, find the total number of elements present in the list. 
+
+        long totalCount = numbers.stream().count();
+        System.out.println("Total number of elements: " + totalCount);
+
+        //2. Given a list of integers, find out all the numbers starting with 1.
+
+        List<Integer> numbersStartingWithOne = numbers.stream().filter(number -> String.valueOf(number).startsWith("1")).collect(Collectors.toList());
+        System.out.println("Numbers starting with 1: " + numbersStartingWithOne);
+
+        //3. Find the frequency of each element in an array.
+
+        Integer[] array = {1, 2, 3, 2, 4, 1, 5, 2, 3, 1, 4, 4, 5};
+        Map<Integer, Long> frequencyMap = Arrays.stream(array).collect(Collectors.groupingBy(e -> e, Collectors.counting()));
+        System.out.println("Frequency of each element: " + frequencyMap);
+
+        //4. Count the total number of vowels in a collection of strings.
+
+        long totalVowels = fruits.stream()
+                .flatMapToInt(CharSequence::chars)  // Flatten strings to a stream of characters
+                .filter(c -> "aeiouAEIOU".indexOf(c) != -1)  // Filter out vowels
+                .count();
+        System.out.println("Total number of vowels: " + totalVowels);
+
+        //5. Count the occurrences of each character in a given string and return a map with character frequencies.
+
+        Map<Character, Long> charFrequencyMap = str.chars().mapToObj(c -> (char) c)
+                .collect(Collectors.groupingBy(c -> c, Collectors.counting()));
+        System.out.println("Character frequencies: " + charFrequencyMap);
+
+        //6. Given a list of integers, sort all the values present in it in descending order.
+
+        List<Integer> sortedDescending = numbers.stream()
+                .sorted(Comparator.reverseOrder()) // Comparator.reverseOrder()
+                .collect(Collectors.toList());
+        System.out.println("Sorted in descending order: " + sortedDescending);
+
+        //7. Given a list of strings, sort them according to increasing order of their length.
+
+        List<String> sortedByLength = fruits.stream().sorted(Comparator.comparingInt(String::length)).collect(Collectors.toList());
+        System.out.println("Sorted by length in increasing order: " + sortedByLength);
+
+        //8. Given two lists of strings, merge them and remove duplicates.
+
+        List<String> list1 = Arrays.asList("apple", "banana", "orange");
+        List<String> list2 = Arrays.asList("banana", "grape", "kiwi");
+        List<String> mergedAndDistinct = Stream.concat(list1.stream(), list2.stream()).distinct().collect(Collectors.toList());
+        System.out.println("Merged and distinct list: " + mergedAndDistinct);
+
+        //9. Find the sum of all digits of a number.
+
+        int number = 12345;
+        int sumOfDigits = String.valueOf(number).chars().map(Character::getNumericValue).sum();
+        System.out.println("Sum of digits: " + sumOfDigits);
+
+
+        //10. Merge two unsorted arrays into a single sorted array.
+
+        int[] array1 = {5, 2, 8, 1, 7};
+        int[] array2 = {4, 9, 3, 6, 10};
+        int[] mergedAndSortedArray = Arrays.stream(array1).boxed().sorted().mapToInt(Integer::intValue).toArray();
+        System.out.println("Merged and sorted array: " + Arrays.toString(mergedAndSortedArray));
+
+        //11. Check if two strings are anagrams or not.
+
+        String s1 = "listen";
+        String s2 = "silent";
+
+        s1 = Stream.of(s1.split("")).map(String::toLowerCase).sorted().collect(Collectors.joining());
+        s2 = Stream.of(s2.split("")).map(String::toLowerCase).sorted().collect(Collectors.joining());
+        if (s1.equals(s2))
+            System.out.println("Two strings are anagrams");
+        else
+            System.out.println("Two strings are not anagrams");
+
+        //12. Reverse each word of a string.
+
+//        String str = "Hello World!";
+        String reversedStr = Arrays.stream(str.split(" ")).map(word -> new StringBuffer(word).reverse()).collect(Collectors.joining(" "));
+        System.out.println("Reversed String: " + reversedStr);
+
+        //13. Check if a string is palindrome or not.
+
+//        String str = "madam";
+        boolean isPalindrome = IntStream.range(0, str.length() / 2)
+				.noneMatch(index -> str.charAt(index) != str.charAt(str.length() - index - 1));
+        if(isPalindrome)
+            System.out.println(str + " is palindrome");
+        else
+            System.out.println(str + " is not palindrome");
+
+
+        //14. Given a list of lists of strings, flatten it into a single list of unique words.
+
+        List<List<String>> listOfLists = Arrays.asList(
+                Arrays.asList("apple", "orange", "banana"),
+                Arrays.asList("banana", "grape", "kiwi"),
+                Arrays.asList("orange", "apple", "kiwi"));
+        List<String> uniqueWords = listOfLists.stream()
+                .flatMap(List::stream)  // Flatten the nested lists
+                .distinct()             // Get unique words
+                .collect(Collectors.toList());
+        System.out.println("Unique words: " + uniqueWords);
+
+        //15. Print fibonacci series.
+
+        int n = 10;
+        Stream.iterate(new long[]{0, 1}, fib -> new long[]{fib[1], fib[0] + fib[1]}).limit(n).mapToLong(fib -> fib[0]).forEach(System.out::println);
+
+
+    }
+}
 
 
